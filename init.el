@@ -19,8 +19,12 @@
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
 
-;; 禁用工具栏和滚动条
+;;; No Menu Bar
+(menu-bar-mode -1)
+;;; No tool bar
 (tool-bar-mode -1)
+
+;;; No Scrollbar
 (scroll-bar-mode -1)
 
 (setq dashboard-banner-logo-title "Welcome to Emacs, comrade!")
