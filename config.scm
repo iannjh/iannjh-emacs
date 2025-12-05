@@ -70,13 +70,13 @@
   ;; 更新交换分区的设备标识符
   (swap-devices (list (swap-space
                         (target (uuid
-                                 "a42fb223-8585-4784-9d27-abb4870d3c71"))))) ; 使用图片中的正确 UUID
+                                 "c26c3f70-d623-2347-8c4c-b56dca9f4e2f"))))) ; 根据图片更新为正确的 UUID
 
   ;; 更新文件系统挂载点
   (file-systems (cons* (file-system
                          (mount-point "/")
                          (device (uuid
-                                  "e10418ac-d9dd-49d6-b1c9-af4c6c554f0f" ; 使用图片中的正确 UUID
+                                  "40aa123d-e8d7-624c-9b29-80c5418b8da1" ; 根据图片更新为正确的 UUID
                                   'ext4))
                          (type "ext4"))
                        ;; 如果 /home 是一个独立的分区，请取消下面的注释并填写正确的 UUID。
