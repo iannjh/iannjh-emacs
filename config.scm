@@ -27,6 +27,11 @@
                           (specification->package "libinput")
                           (specification->package "mesa")
                           (specification->package "wayland-utils")
+                          (specification->package "librewolf")
+                          (specification->package "git")
+                          (specification->package "torbrowser")
+                          (specification->package "blender")
+                          (specification->package "gimp")
                           (specification->package "wayland"))
                     %base-packages))
 
