@@ -3,10 +3,14 @@
 
 (setq package-archives '(("gnu" . "https://mirrors.ustc.edu.cn/elpa/gnu/")
                          ("melpa" . "https://mirrors.ustc.edu.cn/elpa/melpa/")
-                         ("melpa-stable" . "https://stable.melpa.org/packages/")
                          ("nongnu" . "https://mirrors.ustc.edu.cn/elpa/nongnu/")))
 
 (package-initialize)
+
+ ;; 安装 Lua 相关包
+(package-install 'lua-mode)
+(package-install 'lsp-mode)
+(package-install 'markdown-mode) ; 刷新后自动安装最新版
 
 ;; 更新包缓存
 (unless package-archive-contents
@@ -24,21 +28,16 @@
 
 ;; 启用主题（以 gruvbox 为例）
 ;; 注意：你需要先安装 'fleury 主题
-(if (package-installed-p 'fleury-theme)
-    (load-theme 'fleury t)
-  (message "Theme 'fleury not installed. Using default theme."))
+(if (package-installed-p 'masked-theme)
+    (load-theme 'masked t)
+  (message "Theme 'masked not installed. Using default theme."))
 
 ;; 启用主题（以 gruvbox 为例）
-(load-theme 'fleury t)
+(load-theme 'masked t)
 
 ;; 设置显示行号
 (setq display-line-numbers-type 'relative) 
 (global-display-line-numbers-mode t)
-
-;; 配置 neotree
-(add-to-list 'load-path "~/.emacs.d/neotree")
-(require 'neotree)
-(global-set-key [f8] 'neotree-toggle)
 
 ;;; No Menu Bar
 (menu-bar-mode -1)
@@ -46,6 +45,15 @@
 (tool-bar-mode -1)
 ;;; No Scrollbar
 (scroll-bar-mode -1)
+
+;; 配置 neotree
+(add-to-list 'load-path "~/.emacs.d/neotree")
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
+
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (neotree-show)))
 
 ;; 配置 dashboard
 (use-package dashboard
@@ -59,22 +67,6 @@
           "    | |  __/ |  | | |  __/  __/ |  | | (_| | (__| | | |"
           "    |_|\\___|_|  |_|  \\___|\\___|_|  |_|\\__,_|\\___|_| |_|"))
   (dashboard-setup-startup-hook))
-
-;; 安装必要的依赖包
-(dolist (pkg '(compat doom-modeline markdown-mode))
-  (unless (package-installed-p pkg)
-    (package-install pkg)))
-
-;; 配置 doom-modeline（在所有依赖安装后）
-(use-package doom-modeline
-  :init (doom-modeline-mode 1))
-
-;; 配置 markdown-mode
-(use-package markdown-mode
-  :mode ("README\\.md\\'" . gfm-mode)
-  :init (setq markdown-command "multimarkdown")
-  :bind (:map markdown-mode-map
-         ("C-c C-e" . markdown-do)))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
